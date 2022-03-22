@@ -1,7 +1,5 @@
 ## Docusaurus ile Harika Dokümanlar Oluşturalım
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1647971912767/PO4plJ9pq.png)
-
 Bir projeyi devralırken ya da yeni bir şeyler öğrenirken ilk görmek istediğimiz şey genellikle dokümanlar oluyor. Aramızda dokümanın öneminin farkında olmayan yoktur diye umut ediyorum.🥊 Bundan sebep, bu yazıda dokümanın öneminden değil, nasıl harika dokümanlar oluşturabileceğimizden bahsedeceğim.
 
 ### 🦖Docusaurus nedir?
