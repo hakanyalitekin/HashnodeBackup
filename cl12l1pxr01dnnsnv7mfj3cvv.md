@@ -1,7 +1,5 @@
 ## Medium’daki yazıları Dev.to ile senkronize etmek
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1647980503849/wXIlYL8fu.jpeg)
-
 Nedeni bir türlü anlayamadığım Medium’un yükselişinden sonra ben de dahil bir çok geliştirici, gerek insanlarla paylaşımda bulunmak gerek Türkçe kaynak oluşturmak için bildiklerini Medium üzerinden aktarmaya başladı.
 
 Medium, düz yazılar paylaşmak güzel bir yer olabilir belki ama kod paylaşımı için hiç de kullanışlı olmayan, gist gibi ekstra zahmetlere katlanmamıza sebep olan bir yer.
