@@ -1,7 +1,5 @@
 ## C# ile PDF Oluşturma (Örnek fatura uygulaması)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1647972077532/Wktuc2ba-.jpeg)
-
 Merhabalar bu yazımda günlük hayatta olmazsa olmazlar arasında bulunan PDF’leri, C# ile Server side Handlebars template engine kullanarak nasıl oluşturabileceğimizden bahsedeceğim.
 
 **Doğrudan örnek projeyi incelemek için** [**GitHub linki.**](https://github.com/hakanyalitekin/SampleCreatePDF)
@@ -143,4 +141,3 @@ localhost:(port)/api/home/CreatePdf’ü tetikleyerek pdf’in oluşup oluşmad�
 
 Umarım ufakta olsa faydam dokunmuştur.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1647972082890/OKDhJT9q-.gif)
