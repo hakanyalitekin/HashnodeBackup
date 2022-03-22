@@ -1,7 +1,5 @@
 ## WSL 2 Linux ve Docker özelinde bir kaç sorun ve çözümü
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1647972028709/f3TZ88mys.jpeg)
-
 Öncelikle bu yazının, **WSL2 -Linux -Docker** üçlüsünü kullanırken **yaşadığım sorunların çözümünü** içerdiğini belirtmek isterim.
 
 **WLS 2 ile ilgili ayrıntılı bilgiyi** aşağıdaki [Deniz İrgin](https://medium.com/u/5512c90ef9e0)’in yazısından edinebilirsiniz. **Kesinlikle çok güzel bir yazı ve mutlaka okunmalıdır.** Yazıyı okurken bazı kısımlarda belirtilen **preview** kısımlarının artık **preview** olmadığını belirtmek isterim.
