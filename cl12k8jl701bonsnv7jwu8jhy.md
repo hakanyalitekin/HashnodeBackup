@@ -37,7 +37,9 @@ Publish etmeden önce **web.config** içerisinde küçük bir ayar yapmamız ger
 
 > **Unutulmamalıdır ki bu public bir key, edinen herkes her işlemi yapabilir.**
 
+```
 <add key="apiKey" value="123456CokZor" />
+```
 
 Dünyanın en zor parolasını da belirledikten sonra artık publish işlemine geçebiliriz.
 
@@ -101,7 +103,12 @@ Publish işlemi tamamlandıktan sonra sıra geldi paketimizi yayınlamaya. Publi
 
 Komut istemi çalıştıktan sonra, aşağıdaki kodun ilgili alanlarını doldurup enter dememiz yeterli olacaktır. Kodun hemen altında aşağıda bir örnek görüntü paylaştım.
 
-nuget push **PAKET\_ADI.1.0.0**.nupkg -source [**D**](http://nugetserver)**OMAIN** -ApiKey **PUBLIC\_KEY**
+
+```
+nuget push PAKET_ADI.1.0.0.nupkg -source DOMAIN -ApiKey PUBLIC_KEY
+
+``` 
+
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1647972067250/XFgTJ8GXB.png)
 
@@ -112,15 +119,21 @@ nuget push **PAKET\_ADI.1.0.0**.nupkg -source [**D**](http://nugetserver)**OMAIN
 
 Paket haline getireceğimiz DLL’imizi, taşıdığımız klasörün adres yoluna **cmd** diyerek, komut istemini başlatıyoruz ve sırasıyla aşağıdaki komutları çalıştırıyoruz.
 
-nuget spech **PAKET\_ADI**
+```
+nuget spech PAKET_ADI
+```
 
 Bu komut bize **MyPackage.nuspec** uzantılı bir dosya oluşturacak. Oluşan bu dosya ne diyecek olursak, publish yöntemindeki kullandığımız paketin özelliklerini belirlediğimiz Package sekmesinin XML hali. Bu dosyayı herhangi bir editör ile açıp yine logo, sürüm vb. özelliklerini düzenleyebiliriz.
 
-nuget pack **PAKET\_ADI**.nuspec
-
+```
+nuget pack PAKET_ADI.nuspec
+```
 Bu komut bize push edeceğimiz dosyayı oluşturuyor. Push etmeden önce yapacağımız değişiklikler varsa eğer, bu dosyayı editör ile açıp yapmamız gerekiyor.
 
-nuget push **PAKET\_ADI.1.0.0**.nupkg -source [**D**](http://nugetserver)**OMAIN** -ApiKey **PUBLIC\_KEY**
+```
+nuget push PAKET_ADI.1.0.0.nupkg -source DOMAIN -ApiKey PUBLIC_KEY
+
+```
 
 Ve son olarak bu komut ile paketimizi nuget server’ımıza aktarıyoruz.
 
