@@ -1,7 +1,5 @@
 ## Local NuGet Server Kurulumu ve Kullanımı
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1647972049752/exL6wjmao.png)
-
 Merhabalar,
 
 Uzun bir aradan sonra, yakın zamanda öğrendiğim, benim için de öğretici ve eğlenceli bir konu olan NuGet Server kurulumu ve kullanımından bahsetmek istedim.
