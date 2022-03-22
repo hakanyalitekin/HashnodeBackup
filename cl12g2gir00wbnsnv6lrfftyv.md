@@ -23,7 +23,10 @@ Ben docusaurus’u dahil etmek için çalıştıracağım komutu, projemde **�
 
 Projemize docusaurus’u dahil etmek için çalıştıracağımız komut oldukça basit
 
-npx create-docusaurus@latest **docs** classic
+``` 
+npx create-docusaurus@latest docs classic 
+
+```
 
 **💡docs** dediğim yere herhangi bir şey yazılır illa docs olmak zorunda değil.
 
@@ -93,8 +96,9 @@ Gerekli ayarlamaları yaptıktan sonra; biraz sonra vereceğim kod normal termin
 
 Ardından deploy için çalıştırmamız gereken kodu yapıştırıyoruz;
 
-**GIT\_USER=hakanyalitekin yarn deploy**
-
+```git
+GIT_USER=hakanyalitekin yarn deploy
+```
 Eğer her şey yolunda giderse şöyle bir görüntü oluşmalı, ve bize dokümanımızın yayınlandığı URL’i veriyor olması gerekiyor.  
 🌍 [**https://hakanyalitekin.github.io/docDemo/**](https://hakanyalitekin.github.io/docDemo/)
 
@@ -121,7 +125,7 @@ Ben topluluk tarafında oluşturulan, aralarından kendimce en pratik uygulanabi
 
 [**Bu adresten**](https://github.com/easyops-cn/docusaurus-search-local) arama için kullanacağımız ilgili repo incelenebilir. Uygulaması oldukça basit. Şu komutu çalıştırıyoruz;
 
-``` ps1
+``` 
 npm install --save @easyops-cn/docusaurus-search-local
 
 ``` 
@@ -129,7 +133,7 @@ npm install --save @easyops-cn/docusaurus-search-local
 
 npm paket kurulumu tamamlandıktan sonra, **docusaurus.config.js** dosyamızın en altına (farklı yerde olabilir) aşağıdaki kod bloğunu yapıştırıyoruz.
 
-``` json
+```
 themes: \[  
     \[  
       require.resolve("[@easyops](http://twitter.com/easyops)\-cn/docusaurus-search-local"),  
