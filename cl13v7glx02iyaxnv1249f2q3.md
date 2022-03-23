@@ -1,15 +1,5 @@
 ## .Net Framework için Swagger ve JWT Authentication
 
----
-title: .Net Framework için Swagger ve JWT Authentication
-published: true
-date: 2020-05-19 19:33:33 UTC
-tags: jwttoken,swashbuckle,swagger,jwt
-canonical_url: 
----
-
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1648058024560/WYRVvOugF.png)
-
 Merhaba bu yazıda Swagger ve JWT(JSON Web Token) kavramlarından örnek bir uygulama ile bahsediyor olacağım.
 
 **Doğrudan örnek projeyi incelemek için** [**GitHub linki.**](https://github.com/hakanyalitekin/SwaggerWithJWT)
@@ -31,11 +21,76 @@ Bir web api projesi oluşturabildiğinizi ya da hali hazırda bir web api projen
 
 Sonrasında JWT token oluşturma ve çözümleme işlemlerini yöneteceğimiz JwtManager.cs adında bir class oluşturuyoruz. İçeriğini aşağıdaki gibi ayarlıyoruz. Ufak detayları açıklama satırları olarak koda ekledim.
 
-{% gist https://gist.github.com/hakanyalitekin/bb66949952905ddea4bc67a1c8cb0117 %}
+```
+using SwaggerWithJWT.Helpers;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 
+namespace SwaggerWithJWT.Filters
+{
+    public class JWTAuthenticationAttribute : AuthorizationFilterAttribute
+    {
+        //override yazıp ovirrede yapılabilecek metorlar listesinden OnAuthorization'u seçiyoruz.
+        public override void OnAuthorization(HttpActionContext actionContext)
+        {
+            //Gelen request'i kontrol editoruz. Authorization boş ise direk 401 Unauthorized veriyoruz.
+            if (actionContext.Request.Headers.Authorization == null)
+            {
+                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+            //Eğer doluysa geçerliliğini kontrol ediyoruz.
+            else
+            {
+                var tokenKey = actionContext.Request.Headers.Authorization.Parameter;
+                var decodeToken = JwtManager.GetPrincipal(tokenKey);
+                if (decodeToken == null)
+                {
+                    actionContext.Response = actionContext.Request.CreateResponse(System.Net.HttpStatusCode.Unauthorized);
+
+                }
+            }
+        }
+    }
+}
+```
 Artık elimizde token yapımızı yönetebileceğimiz bir token manager sınıfımız olduğuna göre Authentication Attribute’ümüzü yazabiliriz. Öncelikle eğer yoksa Filters adında bir klasör oluşturup içerisine JWTAuthenticationAttribute.cs adında bir klas ekliyoruz ve içeriğini aşağıda ki gibi oluşturuyoruz. Gerekli açıklamaları yorum satırları olarak koda ekledim.
 
-{% gist https://gist.github.com/hakanyalitekin/99e7226782f8c8b129923c88b76780ad %}
+```
+using SwaggerWithJWT.Helpers;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
+
+namespace SwaggerWithJWT.Filters
+{
+    public class JWTAuthenticationAttribute : AuthorizationFilterAttribute
+    {
+        //override yazıp ovirrede yapılabilecek metorlar listesinden OnAuthorization'u seçiyoruz.
+        public override void OnAuthorization(HttpActionContext actionContext)
+        {
+            //Gelen request'i kontrol editoruz. Authorization boş ise direk 401 Unauthorized veriyoruz.
+            if (actionContext.Request.Headers.Authorization == null)
+            {
+                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+            //Eğer doluysa geçerliliğini kontrol ediyoruz.
+            else
+            {
+                var tokenKey = actionContext.Request.Headers.Authorization.Parameter;
+                var decodeToken = JwtManager.GetPrincipal(tokenKey);
+                if (decodeToken == null)
+                {
+                    actionContext.Response = actionContext.Request.CreateResponse(System.Net.HttpStatusCode.Unauthorized);
+
+                }
+            }
+        }
+    }
+}
+```
 
 Authentication Attribute’ümüzü de yazdığımıza göre kimlik doğrulaması yapacağımız controller’larımıza gerekli eklemeleri yapıyoruz.
 
@@ -57,7 +112,55 @@ Swasbuckle paketini indirdikten sonra, metotlarımızın üstüne eklediğimiz s
 
 Projemizde bu ayarı yaptıktan sonra, Swasbuckle paketini indirdiğimizde **App\_Start’ın** altına eklenen **SwaggerCongfig.cs** ’in içerisinde de bazı ayarlamalar yapmamız gerekmekte. Ben beraberinde gelen açıklama satırlarını kaldırdım. Sizde kaldırmadan önce bir göz gezdirebilirseniz faydasını göreceksiniz.
 
-{% gist https://gist.github.com/hakanyalitekin/548430f8f97f94bb73d5e9327f0d3088 %}
+```
+using SwaggerWithJWT;
+using Swashbuckle.Application;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Web.Http;
+using WebActivatorEx;
+
+[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
+
+namespace SwaggerWithJWT
+{
+    public class SwaggerConfig
+    {
+        public static void Register()
+        {
+            var thisAssembly = typeof(SwaggerConfig).Assembly;
+
+            GlobalConfiguration.Configuration
+                .EnableSwagger(c =>
+                    {
+
+                        c.SingleApiVersion("v1", "Swagger With JWT (İstenilen herhangi bir isim verilebilir.)");
+
+                        //Token için eklendi.
+                        c.ApiKey("Authorization")
+                        .Description("Filling bearer token here")
+                        .Name("Bearer")
+                        .In("header");
+
+
+                        //Summary için eklendi. //Uyarı mesajlarını kaldırmak için Projenin Proproty'sinde ki Build'in altınada ki warning'e 1591 eklenmelidir. 
+                        var baseDirectory = AppDomain.CurrentDomain.BaseDirectory + @"bin\";
+                        var commentsFileName = Assembly.GetExecutingAssembly().GetName().Name + ".XML";
+                        var commentsFile = Path.Combine(baseDirectory, commentsFileName);
+                        c.IncludeXmlComments(commentsFile);
+
+                    })
+                .EnableSwaggerUi(c =>
+                    {
+                        //Token için eklendi.
+                        c.EnableApiKeySupport("Authorization", "header");
+
+                    });
+        }
+    }
+}
+```
 
 Artık tüm ayarlamalarımızı tamamladığımıza göre ilk testimizi gerçekleştirelim. Ben kolaylık olsun her seferinde linkin sonuna swagger yazmamak için şöyle bir şey yaptım. Bunu yapmadan direk linkin sonuna swagger yazarak swagger’a erişebilirsiniz.
 
