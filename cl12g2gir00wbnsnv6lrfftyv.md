@@ -73,6 +73,7 @@ Eğer yukarıdaki adımları başarılı bir şekilde uygulayabildiysek, görün
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1647971922538/csdpUIBIn.png)
 
 **💡Bir sonraki adıma geçmeden önce şunları belirteyim;**
+
 ➡️Sadece **MD** değil **MDX** dosyası da desteklenir.  
 ➡️ **React.js** konsepti ile özgün sayfalar oluşturulabilir.  
 ➡️Blog sayfası düzenlenecekse, blog postlarının **başına tarih eklenmelidir.**  
